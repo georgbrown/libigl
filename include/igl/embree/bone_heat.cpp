@@ -66,7 +66,7 @@ bool igl::embree::bone_heat(
     const Vector3d d = C.row(BE(j,1));
     VectorXd t,sqrD;
     project_to_line_segment(V,s,d,t,sqrD);
-    D.col(np+j) = sqrD.array().sqrt();
+    D.col(np+j) = sqrD.array().sqrt().matrix();
     VectorXb vj;
     bone_visible(V,F,ei,s,d,vj);
     vis_mask.col(np+j) = vj;
@@ -87,7 +87,7 @@ bool igl::embree::bone_heat(
     PP(i,J(i)) = 1;
     if(vis_mask(i,J(i)))
     {
-      double hii = pow(min_D(i),-2.); 
+      double hii = pow(min_D(i),-2.);
       Hdiag(i) = (hii>1e10?1e10:hii);
     }
   }

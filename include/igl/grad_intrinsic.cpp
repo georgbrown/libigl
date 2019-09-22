@@ -50,7 +50,7 @@ IGL_INLINE void igl::grad_intrinsic(
     (l.col(1).cwiseAbs2()-l.col(0).cwiseAbs2()-l.col(2).cwiseAbs2()).array()/
     (-2.*l.col(0)).array();
   V2.block(0,1,m,1) =
-    (l.col(2).cwiseAbs2() - V2.block(0,0,m,1).cwiseAbs2()).array().sqrt();
+    (l.col(2).cwiseAbs2() - V2.block(0,0,m,1).cwiseAbs2()).array().sqrt().matrix();
   DerivedF F2(F.rows(),F.cols());
   std::vector<Eigen::Triplet<Gtype> > Pijv;
   Pijv.reserve(F.size());

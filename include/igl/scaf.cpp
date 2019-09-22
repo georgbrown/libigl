@@ -406,7 +406,7 @@ void build_surface_linear_system(const SCAFData &s, Eigen::SparseMatrix<double> 
   const int f_n = s.mf_num;
 
   // to get the  complete A
-  Eigen::VectorXd sqrtM = s.m_M.array().sqrt();
+  Eigen::VectorXd sqrtM = s.m_M.array().sqrt().matrix();
   Eigen::SparseMatrix<double> A(dim * dim * f_n, dim * v_n);
   auto decoy_Dx_m = s.Dx_m;
   decoy_Dx_m.conservativeResize(s.W_m.rows(), v_n);
@@ -485,7 +485,7 @@ void build_scaffold_linear_system(const SCAFData &s, Eigen::SparseMatrix<double>
   const int v_n = s.Dx_s.cols();
   const int dim = s.dim;
 
-  Eigen::VectorXd sqrtM = s.s_M.array().sqrt();
+  Eigen::VectorXd sqrtM = s.s_M.array().sqrt().matrix();
   Eigen::SparseMatrix<double> A(dim * dim * f_n, dim * v_n);
   buildAm(sqrtM, s.Dx_s, s.Dy_s, s.W_s, A);
 
@@ -511,7 +511,7 @@ void build_scaffold_linear_system(const SCAFData &s, Eigen::SparseMatrix<double>
     unknown_ids.block(d * (v_n - n_b), 0, v_n - n_b, unknown_ids.cols()) =
         unknown_ids.topRows(v_n - n_b) + d * v_n;
   }
-  Eigen::VectorXd sqrt_M = s.s_M.array().sqrt();
+  Eigen::VectorXd sqrt_M = s.s_M.array().sqrt().matrix();
 
   // manual slicing for A(:, unknown/known)'
   Eigen::SparseMatrix<double> Au, Ae;

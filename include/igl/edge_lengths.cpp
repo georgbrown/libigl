@@ -15,9 +15,9 @@ IGL_INLINE void igl::edge_lengths(
   Eigen::PlainObjectBase<DerivedL>& L)
   {
       igl::squared_edge_lengths(V,F,L);
-      L=L.array().sqrt().eval();
+      L=L.array().sqrt().matrix().eval();
   }
-  
+
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
